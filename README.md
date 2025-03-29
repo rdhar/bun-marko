@@ -1,4 +1,4 @@
-# Thanks for checking out Marko
+# Thanks for checking out Marko via Bun
 
 # Installation
 
