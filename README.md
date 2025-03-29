@@ -1,17 +1,14 @@
-# Thanks for checking out Marko via Bun
-
-# Installation
-
-```
-npx @marko/create marko-app --template basic
-cd marko-app
-npm install
-npm run dev
-```
+# Marko.js with Bun.sh
 
 ## Overview
 
-This project is powered by [@marko/run](https://github.com/marko-js/run).
+This project is:
+- Powered by [@marko/run](https://github.com/marko-js/run)
+- Build by [Bun.sh](https://bun.sh)
+- Deployed by [GitHub Actions](.github/workflows/publish_pages.yaml)
+- Hosted on [GitHub Pages](https://rdhar.github.io/bun-marko/)
+
+## Getting Started
 
 - Run `npm run dev` to start the development server
 - Run `npm run build` to build a production-ready node.js server
