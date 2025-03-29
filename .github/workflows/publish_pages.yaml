@@ -1,0 +1,62 @@
+---
+name: Publish Pages
+
+on:
+  push:
+    branches: [main]
+    paths: [src/**, .github/workflows/publish_pages.yaml]
+
+jobs:
+  Pages:
+    runs-on: [ubuntu-24.04]
+
+    permissions:
+      contents: read # Required to checkout repository.
+      id-token: write # Required to authenticate via OIDC.
+      pages: write # Required to publish GitHub Pages.
+
+    concurrency:
+      cancel-in-progress: true
+      group: pages
+
+    environment:
+      name: github-pages
+      url: ${{ steps.publish.outputs.page_url }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@4bc047ad259df6fc24a6c9b0f9a0cb08cf17fbe5 # v2.0.1
+        with:
+          bun-version: 1.2.7
+
+      - name: Cache Node modules
+        id: cache
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
+        with:
+          key: node-modules-${{ hashFiles('bun.lock') }}
+          path: node_modules
+
+      - name: Install Node modules
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: bun install --frozen-lockfile --production
+
+      - name: Build GitHub Pages
+        env:
+          BASE_URL: /${{ github.event.repository.name }}/
+          NODE_ENV: production
+        run: bun run build
+
+      - name: Upload GitHub Pages
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
+        with:
+          path: dist/public/
+          retention-days: 1
+
+      - name: Publish GitHub Pages
+        id: publish
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
