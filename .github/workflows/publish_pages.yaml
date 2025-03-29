@@ -49,7 +49,7 @@ jobs:
 
       - name: Install Node modules
         if: steps.cache.outputs.cache-hit != 'true'
-        run: bun install # --frozen-lockfile --production
+        run: bun install --frozen-lockfile # --production
 
       - name: Build GitHub Pages
         env:
