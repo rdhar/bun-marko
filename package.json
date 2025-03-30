@@ -5,7 +5,8 @@
   "scripts": {
     "build": "marko-run build",
     "dev": "marko-run",
-    "preview": "marko-run preview"
+    "preview": "marko-run preview",
+    "start": "node --enable-source-maps ./dist/index.mjs"
   },
   "dependencies": {
     "@marko/run": "0.6.2",
@@ -14,5 +15,8 @@
   },
   "devDependencies": {
     "@types/bun": "1.2.8"
+  },
+  "peerDependencies": {
+    "typescript": "5.8.2"
   }
 }
