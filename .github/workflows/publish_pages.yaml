@@ -3,8 +3,8 @@ name: Publish Pages
 
 on:
   push:
-    # branches: [main]
-    # paths: [src/**, .github/workflows/publish_pages.yaml]
+    branches: [main]
+    paths: [src/**, .github/workflows/publish_pages.yaml]
 
 jobs:
   Pages:
