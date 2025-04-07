@@ -9,7 +9,7 @@
     "start": "node --enable-source-maps ./dist/index.mjs"
   },
   "dependencies": {
-    "@marko/run": "0.6.2",
+    "@marko/run": "0.6.3",
     "@marko/run-adapter-static": "1.0.2",
     "marko": "5.37.27"
   },
